@@ -12,8 +12,8 @@
 					<button type="button" class="btn btn-secondary mt-4 text-nowrap" id="duplicateBtn">중복확인</button>				
 				</div>
 				
-				<div class="small text-success d-none" id="availablebeText">사용가능한 ID입니다.</div>
-				<div class="small text-danger d-none" id="duplicatebeText">중복된 ID입니다.</div>
+				<div class="small text-success d-none" id="availableText">사용가능한 ID입니다.</div>
+				<div class="small text-danger d-none" id="duplicateText">중복된 ID입니다.</div>
 				
 				<input type="password" class="form-control mt-2" id="passwordInput" placeholder="비밀번호">
 				<input type="password" class="form-control mt-2" id="passwordConfirmInput" placeholder="비밀번호 확인">
@@ -32,8 +32,9 @@
 		
 		<script layout:fragment="script">
 			
-			// 회원가입
 			$(document).ready(function() {
+				
+				// 회원가입
 				$("#signupBtn").on("click", function() {
 					let id = $("#idInput").val();
 					let password = $("#passwordInput").val();
@@ -83,12 +84,8 @@
 						
 					});
 				});
-				
-			});
 			
-			// 아이디 중복확인
-			$(document).ready(function() {
-				
+				// 아이디 중복확인
 				$("#duplicateBtn").on("click", function() {
 					let id = $("#idInput").val();
 					
@@ -103,10 +100,12 @@
 						, data:{"loginId":id}
 						, success:function(response) {
 							if(response.isDuplicated) {
+								alert("중복");
 								$("#duplicateText").removeClass("d-none");
 								$("#availableText").addClass("d-none");
 							} else {
-								$("#availalbeText").removeClass("d-none");
+								alert("중복안됨");
+								$("#availableText").removeClass("d-none");
 								$("#duplicateText").addClass("d-none");							
 							}
 						}	
