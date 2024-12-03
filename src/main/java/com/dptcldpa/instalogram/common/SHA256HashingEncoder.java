@@ -10,7 +10,7 @@ public class SHA256HashingEncoder {
 		String result = "";
 		
 		try {
-			MessageDigest messageDigest = MessageDigest.getInstance("sha356");
+			MessageDigest messageDigest = MessageDigest.getInstance("sha256");
 			
 			byte[] bytes = message.getBytes();
 			
