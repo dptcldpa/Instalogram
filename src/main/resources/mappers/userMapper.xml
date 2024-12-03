@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="com.dptcldpa.instalogram.user.repository.UserRepository">
+	<insert id="insertUser" parameterType="map">
+		INSERT INTO
+			`user`
+		(
+			`loginId`
+			, `password`
+			, `name`
+			, `email`
+			, `bio`
+			, `profileImage`
+		)
+		VALUE
+		(
+			#{loginId}
+			, #{password}
+			, #{name}
+			, #{email}
+			, #{bio}
+			, #{profileImage}
+		)
+	</insert>
+	
+	<select id="selectCountLoginId" parameterType="string" reslutType="int">
+		SELECT
+			count(*)
+		FROM
+			`user`
+		WHERE
+			`loginId` = #{loginId}		
+	</select>
+</mapper>
