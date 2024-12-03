@@ -26,13 +26,11 @@ public class UserRestController {
 			@RequestParam("loginId") String loginId
 			, @RequestParam("password") String password
 			, @RequestParam("name") String name
-			, @RequestParam("email") String email
-			, @RequestParam("bio") String bio
-			, @RequestParam("profileImage") String profileImage) {
+			, @RequestParam("email") String email) {
 		
 		Map<String, String> resultMap = new HashMap<>();
 		
-		if(userService.addUser(loginId, password, name, email, bio, profileImage)) {
+		if(userService.addUser(loginId, password, name, email)) {
 			resultMap.put("result", "success");
 		} else {
 			resultMap.put("result", "fail");			

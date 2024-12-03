@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dptcldpa.instalogram.user.repository.UserRepository">
 	<insert id="insertUser" parameterType="map">
 		INSERT INTO
@@ -9,8 +11,6 @@
 			, `password`
 			, `name`
 			, `email`
-			, `bio`
-			, `profileImage`
 		)
 		VALUE
 		(
@@ -18,12 +18,10 @@
 			, #{password}
 			, #{name}
 			, #{email}
-			, #{bio}
-			, #{profileImage}
 		)
 	</insert>
 	
-	<select id="selectCountLoginId" parameterType="string" reslutType="int">
+	<select id="selectCountLoginId" parameterType="string" resultType="int">
 		SELECT
 			count(*)
 		FROM

@@ -19,13 +19,11 @@ public class UserService {
 			String loginId
 			, String password
 			, String name
-			, String email
-			, String bio
-			, String profileImage) {
+			, String email) {
 		
 		String encodingPassword = SHA256HashingEncoder.encode(password);
 		
-		int count = userRepository.insertUser(loginId, encodingPassword, name, email, bio, profileImage);
+		int count = userRepository.insertUser(loginId, encodingPassword, name, email);
 		
 		if(count == 1) {
 			return true;

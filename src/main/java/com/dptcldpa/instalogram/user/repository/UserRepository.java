@@ -10,9 +10,7 @@ public interface UserRepository {
 			@Param("loginId") String loginId
 			, @Param("password") String password
 			, @Param("name") String name
-			, @Param("email") String email
-			, @Param("bio") String bio
-			, @Param("profileImage") String profileImage);
+			, @Param("email") String email);
 
 	public int selectCountLoginId(@Param("loginId") String loginId);
 	
