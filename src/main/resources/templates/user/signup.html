@@ -34,6 +34,9 @@
 			
 			$(document).ready(function() {
 				
+				var isDuplicateCheck = false;
+				var isDuplicateId = true;
+				
 				// 회원가입
 				$("#signupBtn").on("click", function() {
 					let id = $("#idInput").val();
@@ -52,8 +55,16 @@
 						return;
 					}
 					
+					if(!isDuplicatedCheck) {
+						alert("중복체크를 해주세요");
+					}
+					
+					if(isDuplicateId) {
+						alert("중복된 아이디입니다");
+					}
+					
 					if(password != passwordConfirm) {
-						alert("비밀번호가 일치하지 않습니다.");
+						alert("비밀번호가 일치하지 않습니다");
 						return;
 					}
 					
@@ -99,14 +110,19 @@
 						, url:"/user/duplicated-id"
 						, data:{"loginId":id}
 						, success:function(response) {
+							
+							isDuplicateCheck = true;
+							
 							if(response.isDuplicated) {
 								alert("중복");
 								$("#duplicateText").removeClass("d-none");
 								$("#availableText").addClass("d-none");
+								isDuplicateId = true;
 							} else {
 								alert("중복안됨");
 								$("#availableText").removeClass("d-none");
-								$("#duplicateText").addClass("d-none");							
+								$("#duplicateText").addClass("d-none");	
+								isDuplicateId = false;
 							}
 						}	
 						, error:function() {

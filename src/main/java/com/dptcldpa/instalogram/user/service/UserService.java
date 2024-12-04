@@ -45,4 +45,21 @@ public class UserService {
 		
 	}
 	
+	public boolean getUesr(
+			String loginId
+			, String password) {
+		
+		int count = userRepository.getUser(loginId, password);
+		
+		if(count == 1) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	
+	
+	
 }
