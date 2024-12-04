@@ -3,6 +3,8 @@ package com.dptcldpa.instalogram.user.repository;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.dptcldpa.instalogram.user.domain.User;
+
 @Mapper
 public interface UserRepository {
 
@@ -14,7 +16,7 @@ public interface UserRepository {
 
 	public int selectCountLoginId(@Param("loginId") String loginId);
 	
-	public int getUser(
+	public User selectUser(
 			@Param("loginId") String loginId
 			, @Param("password") String password);
 	

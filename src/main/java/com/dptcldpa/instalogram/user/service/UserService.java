@@ -3,6 +3,7 @@ package com.dptcldpa.instalogram.user.service;
 import org.springframework.stereotype.Service;
 
 import com.dptcldpa.instalogram.common.SHA256HashingEncoder;
+import com.dptcldpa.instalogram.user.domain.User;
 import com.dptcldpa.instalogram.user.repository.UserRepository;
 
 @Service
@@ -45,17 +46,11 @@ public class UserService {
 		
 	}
 	
-	public boolean getUesr(
-			String loginId
-			, String password) {
+	public User getUser(String loginId, String password) {
 		
-		int count = userRepository.getUser(loginId, password);
+		String encodingPassword = SHA256HashingEncoder.encode(password);
 		
-		if(count == 1) {
-			return true;
-		} else {
-			return false;
-		}
+		return userRepository.selectUser(loginId, encodingPassword);
 		
 	}
 	
