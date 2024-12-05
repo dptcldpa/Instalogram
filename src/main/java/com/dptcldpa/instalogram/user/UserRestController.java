@@ -59,7 +59,7 @@ public class UserRestController {
 	public Map<String, String> login(
 			@RequestParam("loginId") String loginId
 			, @RequestParam("password") String password
-			, HttpServletRequest request) {
+			, HttpSession session) {
 		
 		User user = userService.getUser(loginId, password);
 				
@@ -67,11 +67,8 @@ public class UserRestController {
 
 		if(user != null) {
 			
-			HttpSession session = request.getSession();
-			
-			// user 객체의 id, name
 			session.setAttribute("userId", user.getId());
-			session.setAttribute("userName", user.getName());
+			session.setAttribute("userLoginId", user.getLoginId());
 			
 			
 			resultMap.put("result", "success");
