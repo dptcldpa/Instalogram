@@ -132,6 +132,16 @@
 					});
 					
 				});
+				
+				
+				$("#idInput").on("input", function() {
+					isDuplicateCheck = false;
+					isDuplicateId = true;
+					
+					$("#duplicateText").addClass("d-none");
+					$("#availableText").addClass("d-none");
+					
+				});
 		
 			});
 		
