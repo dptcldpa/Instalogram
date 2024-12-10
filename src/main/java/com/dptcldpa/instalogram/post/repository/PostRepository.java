@@ -1,10 +1,11 @@
 package com.dptcldpa.instalogram.post.repository;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Mapper
-public class PostRepository {
+import com.dptcldpa.instalogram.post.domain.Post;
+
+public interface PostRepository extends JpaRepository<Post, Integer> {
 	
-	public 
-
+	
+	
 }
