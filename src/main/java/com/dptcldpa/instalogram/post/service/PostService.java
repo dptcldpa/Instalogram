@@ -17,9 +17,11 @@ import com.dptcldpa.instalogram.user.service.UserService;
 public class PostService {
 	
 	private PostRepository postRepository;
+	private UserService userService;
 	
-	public PostService(PostRepository postRepository) {
+	public PostService(PostRepository postRepository, UserService userService) {
 		this.postRepository = postRepository;
+		this.userService = userService;
 	}
 
 	public boolean addPost(int userId, String contents, MultipartFile file) {
@@ -45,13 +47,14 @@ public class PostService {
 		// 조회된 게시글마다 작성자의 고르인 ID 얻어오기
 		List<Post> postList = postRepository.findAllByOrderByIdDesc();
 		
+		List<CardDTO> cardList = new ArrayList<>();
 		
 		for(Post post:postList) {
 			
 			int userId = post.getUserId();
 			User user = userService.getUserById(userId);
 			
-			Post post = CardDTO.builder()
+			CardDTO card = CardDTO.builder()
 			.postId(post.getId())
 			.userId(userId)
 			.contents(post.getContents())
@@ -59,7 +62,7 @@ public class PostService {
 			.loginId(user.getLoginId())
 			.build();
 			
-			postList.add(post);
+			cardList.add(card);
 		}
 		
 		return postRepository.findAllByOrderByIdDesc();

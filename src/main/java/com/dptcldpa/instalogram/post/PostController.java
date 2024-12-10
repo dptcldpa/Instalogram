@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.dptcldpa.instalogram.post.domain.Post;
+import com.dptcldpa.instalogram.post.dto.CardDTO;
 import com.dptcldpa.instalogram.post.service.PostService;
 
 @RequestMapping("/post")
@@ -23,9 +23,9 @@ public class PostController {
 	@GetMapping("/timeline-view")
 	public String timeLinePost(Model model) {
 		
-		List<Post> postList = postService.getPostList();
+		List<CardDTO> cardList = postService.getPostList();
 		
-		model.addAttribute(postList)
+		model.addAttribute("cardtList", cardList);
 		return "post/timeline";
 	}
 	

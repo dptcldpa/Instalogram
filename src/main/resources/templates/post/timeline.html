@@ -5,7 +5,7 @@
     layout:decorate="~{layout/default}">
 		
 		<section layout:fragment="contents" class="contents d-flex justify-content-center">
-			<div class="input-box my-5 p-4 border border-1 rounded-lg">
+			<div th:each="card:${cardList}" class="input-box my-5 p-4 border border-1 rounded-lg">
 				<div class="d-flex justify-content-between py-2">
 					<div class="d-flex">
 						<img width="40px" height="40px" class="rounded-circle" src="https://cdn.pixabay.com/photo/2024/03/03/20/44/cat-8611246_1280.jpg">
@@ -18,7 +18,7 @@
 				</div>
 				
 				<div>
-					<img width="100%" src="https://cdn.pixabay.com/photo/2024/11/23/08/18/christmas-9218404_640.jpg">
+					<img width="100%" th:src="${card.imagePath}">
 					
 					<div class="text-center">
 						<i class="bi bi-three-dots"></i>
@@ -33,9 +33,9 @@
 				
 				<div class="mt-1">
 					<div class="d-flex">
-						<div>instalogram_id</div>
+						<div th:text="${card.LoginId}">instalogram_id</div>
 						
-						<div>게시글 내용</div>
+						<div th:text="${card.contents}">게시글 내용</div>
 					</div>
 										
 					<div class="small">2024년 12월 25일</div>
