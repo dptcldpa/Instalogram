@@ -26,7 +26,7 @@
 				</div>
 				
 				<div class="d-flex justify-content-between">
-					<i class="bi bi-heart" style="font-size: 1.2rem;"></i>
+					<i class="bi bi-heart like-btn" style="font-size: 1.2rem;" th:data-post-id="${card.postId}"></i>
 					
 					<i class="bi bi-bookmark" style="font-size: 1.2rem;"></i>
 				</div>
@@ -82,11 +82,34 @@
 						if(response.result == "success") {
 							location.href="/post/timeline-view";
 						} else {
-							alert("게시 실패!")
+							alert("게시 실패!");
 						}
 					}
 					, error:function() {
 						alert("게시 에러!");
+					}
+				});
+			});
+			
+			$(".like-btn").on("click", function() {
+				
+				// 이벤트가 발생한 태그 객체
+				let postId = $(this).data("post-id");
+			
+	
+				$.ajax({
+					type:"post"
+					, url:"/post/like"
+					, data:{"postId": postId}
+					, success:function(response) {
+						if(response.result == "success") {
+							location.reload;
+						} else {
+							alert("좋아요 실패!");
+						}
+					}
+					, error:function() {
+						alert("좋아요 에러!");
 					}
 				});
 			});
