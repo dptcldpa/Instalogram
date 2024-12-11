@@ -29,10 +29,10 @@ public class PostService {
 		String imagePath = FileManager.saveFile(userId, file);
 		
 		Post post = Post.builder()
-		.userId(userId)
-		.contents(contents)
-		.imagePath(imagePath)
-		.build();
+			.userId(userId)
+			.contents(contents)
+			.imagePath(imagePath)
+			.build();
 		
 		try {
 			postRepository.save(post);
@@ -42,9 +42,9 @@ public class PostService {
 		}
 	}
 	
-	public List<Post> getPostList() {
+	public List<CardDTO> getPostList() {
 		
-		// 조회된 게시글마다 작성자의 고르인 ID 얻어오기
+		// 조회된 게시글마다 작성자의 로그인 ID 얻어오기
 		List<Post> postList = postRepository.findAllByOrderByIdDesc();
 		
 		List<CardDTO> cardList = new ArrayList<>();
@@ -55,17 +55,17 @@ public class PostService {
 			User user = userService.getUserById(userId);
 			
 			CardDTO card = CardDTO.builder()
-			.postId(post.getId())
-			.userId(userId)
-			.contents(post.getContents())
-			.imagePath(post.getImagePath())
-			.loginId(user.getLoginId())
-			.build();
+				.postId(post.getId())
+				.userId(userId)
+				.contents(post.getContents())
+				.imagePath(post.getImagePath())
+				.loginId(user.getLoginId())
+				.build();
 			
 			cardList.add(card);
 		}
 		
-		return postRepository.findAllByOrderByIdDesc();
+		return cardList;
 		
 	}
 	
