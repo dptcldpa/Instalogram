@@ -43,9 +43,10 @@
 				
 				<div>
 					<div>댓글 달기</div>
-					<input type="text" class="form-control" placeholder="댓글 작성">
 					
-					<button type="button" id="commentBtn">보내기</button>
+					<input type="text" class="form-control" th:id="|commentInput${card.postId}|" placeholder="댓글 작성">
+					
+					<button type="button" class="comment-btn" th:data-post-id="${card.postId}">보내기</button>
 				</div>
 				
 				<hr>
@@ -119,6 +120,30 @@
 						alert("좋아요 에러!");
 					}
 				});
+			});
+			
+			$(".comment-btn").on("click", function() {
+				
+				let postId = $(this).data("post-id");
+				
+				let comment = $("#commentInput" + postId).val();				
+				
+				$.ajax({
+					type:"post"
+					, url:"/post/comment/create"
+					, data:{"postId": postId, "comments":content}
+					, success:function(response) {
+						if(response.result == "success") {
+							location.reload;
+						} else {
+							alert("댓글 작성 실패!");
+						}
+					}
+					, error:function() {
+						alert("댓글 작성 에러!");
+					}
+				});
+				
 			});
 		});
 		</script>

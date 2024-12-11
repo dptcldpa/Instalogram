@@ -24,7 +24,7 @@ public class CommentService {
 		
 		try {
 			commentRepository.save(comment);
-			return false;
+			return true;
 		} catch(Exception e) {
 			return false;
 		}

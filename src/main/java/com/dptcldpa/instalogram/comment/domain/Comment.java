@@ -3,6 +3,7 @@ package com.dptcldpa.instalogram.comment.domain;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,7 +41,7 @@ public class Comment {
 	private LocalDateTime createdAt;
 	
 	@Column(name="updatedAt")
-	@CreationTimestamp
+	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
 }
