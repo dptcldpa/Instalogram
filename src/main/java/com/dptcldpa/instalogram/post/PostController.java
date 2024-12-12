@@ -30,4 +30,10 @@ public class PostController {
 		return "post/timeline";
 	}
 	
+	@GetMapping("/create-view")
+	public String createPost() {
+		
+		return "post/create";
+	}
+	
 }
