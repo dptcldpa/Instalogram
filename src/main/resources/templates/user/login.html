@@ -9,7 +9,7 @@
 				<h1 class="text-center" style="font-family: 'Agbalumo', system-ui;">Instalogram</h1>
 				
 				<form id="loginForm">
-					<input type="text" class="form-control mt-4 mr-2" id="idInput" placeholder="아이디를 입력하세요">
+					<input type="text" class="form-control mt-4 mr-2" id="loginIdInput" placeholder="아이디를 입력하세요">
 					<input type="password" class="form-control mt-2" id="passwordInput" placeholder="비밀번호를 입력하세요">
 					
 					<button type="submit" class="btn btn-secondary btn-block mt-3" id="loginBtn">로그인</button>
@@ -26,12 +26,12 @@
 		
 			$(document).ready(function() {
 				
-				$("#loginForm").on("sumbit", function(e) {
+				$("#loginForm").on("submit", function(e) {
 					
 					// sumbit 이벤트가 가진 고유의 기능을 막는다.
-					e.preventDefalut();
+					e.preventDefault();
 					
-					let id = $("#idInput").val();
+					let id = $("#loginIdInput").val();
 					let password = $("#passwordInput").val();
 					
 					if(id == "") {
@@ -50,7 +50,7 @@
 						, data:{"loginId":id, "password":password}
 						, success:function(response) {
 							if(response.result == "success") {
-								location.href = "/post/timeline-view"
+								location.href = "/post/timeline-view";
 							} else {
 								alert("아이디와 비밀번호를 확인하세요");
 							}
