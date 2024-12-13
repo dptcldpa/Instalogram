@@ -62,89 +62,54 @@
 		</section>
 		
 		<script layout:fragment="script">
-		$(document).ready(function() {
-			$("#uploadBtn").on("click", function() {
-
-				let contents = $("#contentsInput").val();
+		
+			$(document).ready(function() {
+				$(".like-btn").on("click", function() {
+					
+					// 이벤트가 발생한 태그 객체
+					let postId = $(this).data("post-id");
 				
-				let file = $("#fileInput")[0].files[0];
-				
-				if(contents == "") {
-					alert("내용을 입력하세요");
-					return;
-				}
-				
-				let formData = new Formdata();
-				
-				formData.append("contents", contents);
-				formData.append("imageFile", file);
-				
-				$.ajax({
-					type:"post"
-					, url:"/post/create"
-					, data:formData
-					, enctype:"multipart/form-data"
-					, processData:false
-					, contentType:false
-					, success:function(response) {
-						if(response.result == "success") {
-							location.href="/post/timeline-view";
-						} else {
-							alert("게시 실패!");
+		
+					$.ajax({
+						type:"post"
+						, url:"/post/like"
+						, data:{"postId": postId}
+						, success:function(response) {
+							if(response.result == "success") {
+								location.reload;
+							} else {
+								alert("좋아요 실패!");
+							}
 						}
-					}
-					, error:function() {
-						alert("게시 에러!");
-					}
-				});
-			});
-			
-			$(".like-btn").on("click", function() {
-				
-				// 이벤트가 발생한 태그 객체
-				let postId = $(this).data("post-id");
-			
-	
-				$.ajax({
-					type:"post"
-					, url:"/post/like"
-					, data:{"postId": postId}
-					, success:function(response) {
-						if(response.result == "success") {
-							location.reload;
-						} else {
-							alert("좋아요 실패!");
+						, error:function() {
+							alert("좋아요 에러!");
 						}
-					}
-					, error:function() {
-						alert("좋아요 에러!");
-					}
-				});
-			});
-			
-			$(".comment-btn").on("click", function() {
-				
-				let postId = $(this).data("post-id");
-				
-				let comment = $("#commentInput" + postId).val();				
-				
-				$.ajax({
-					type:"post"
-					, url:"/post/comment/create"
-					, data:{"postId": postId, "comments":content}
-					, success:function(response) {
-						if(response.result == "success") {
-							location.reload;
-						} else {
-							alert("댓글 작성 실패!");
-						}
-					}
-					, error:function() {
-						alert("댓글 작성 에러!");
-					}
+					});
 				});
 				
+				$(".comment-btn").on("click", function() {
+					
+					let postId = $(this).data("post-id");
+					
+					let comment = $("#commentInput" + postId).val();				
+					
+					$.ajax({
+						type:"post"
+						, url:"/post/comment/create"
+						, data:{"postId": postId, "comments":content}
+						, success:function(response) {
+							if(response.result == "success") {
+								location.reload;
+							} else {
+								alert("댓글 작성 실패!");
+							}
+						}
+						, error:function() {
+							alert("댓글 작성 에러!");
+						}
+					});
+					
+				});
 			});
-		});
 		</script>
 </html>
