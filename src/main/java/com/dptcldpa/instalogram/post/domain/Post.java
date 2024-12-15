@@ -30,14 +30,13 @@ public class Post {
 	
 	@Column(name="userId")
 	private int userId;
-	
 	private String contents;
 	
 	@Column(name="imagePath")
 	private String imagePath;
 	
 	@Column(name="createdAt")
-	@CreationTimestamp
+	@CreationTimestamp	
 	private LocalDateTime createdAt;
 	
 	@Column(name="updatedAt")
