@@ -1,7 +1,9 @@
-		<header class="d-flex align-items-center justify-content-center">
-			<h1 class="ml-3" style="font-family: 'Agbalumo', system-ui;">Instalogram</h1>
+		<header class="pt-4">
+			<div class=" d-flex align-items-center justify-content-center">
+				<h1 class="text-center w-100 mb-0 ml-3" style="font-family: 'Agbalumo', system-ui;">Instalogram</h1>
+			</div>
 			
-			<div class="mr-3" th:if="${session.userId != null}">
+			<div class="mr-2 d-flex align-items-center justify-content-end" th:if="${session.userId != null}">
 				<span th:text="|${session.userLoginId}님|">홍길동님</span> <a href="/user/logout">로그아웃</a>
 			</div>
 		</header>
