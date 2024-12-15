@@ -31,7 +31,7 @@ public class PostController {
 		
 		List<CardDTO> cardList = postService.getPostList(userId);
 		
-		model.addAttribute("cardtList", cardList);
+		model.addAttribute("cardList", cardList);
 		
 		return "post/timeline";
 	}
