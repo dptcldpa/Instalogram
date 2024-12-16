@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileManager {
 
-	public final static String FILE_UPLOAD_PATH = "D:\\MegaStudyIt\\workspace\\SpringProject\\upload\\instalogram";
+	public final static String FILE_UPLOAD_PATH = "E:\\HM\\springProject\\upload\\instalogram";
 	
 	public static String saveFile(int userId, MultipartFile file) {
 			
@@ -42,6 +42,33 @@ public class FileManager {
 		
 		return "/images" + directoryName + "/" + file.getOriginalFilename();
 			
+	}
+	
+	public static boolean removeFile(String filePath) {
+		
+		if(filePath == null) {
+			return false;
+		}
+		
+		String fullFilePath = FILE_UPLOAD_PATH + filePath.replace("/images", "");
+		
+		Path path = Paths.get(fullFilePath);
+		
+		Path directoryPath = path.getParent();
+		
+		try {
+			Files.delete(path);
+			Files.delete(directoryPath);
+			
+			return true;
+		} catch (IOException e) {
+
+			e.printStackTrace();
+			
+			return false;
+			
+		}
+		
 	}
 	
 }

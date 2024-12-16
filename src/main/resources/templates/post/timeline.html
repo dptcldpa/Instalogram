@@ -12,15 +12,29 @@
 				<!-- 카드 -->
 				<div th:each="card:${cardList}" class="input-box my-5 p-4 border border-1 rounded-lg">
 				
-					<!-- 프로필 사진, 아이디, 메뉴바 -->
+					<!-- 프로필 사진, 아이디, 게시글 메뉴 버튼 -->
 					<div class="d-flex justify-content-between py-2">
 						<div class="d-flex">
+							<!-- 프로필 사진 -->
 							<img width="40px" height="40px" class="rounded-circle" src="https://cdn.pixabay.com/photo/2024/03/03/20/44/cat-8611246_1280.jpg">
+							<!-- 아이디 -->
 							<div class="d-flex align-items-center ml-2" th:text="${card.loginId}">instalogram_id</div>
 						</div>
 						
+						<!-- 게시글 메뉴 버튼 -->
 						<div class="d-flex align-items-center">
-							<i class="bi bi-list" style="font-size: 1.3rem;"></i>
+							<i th:if="${card.userId == session.userId}" class="bi bi-list menu-btn" th:data-post-id="${card.postId}" data-toggle="modal" data-target="#moreModal" style="font-size: 1.3rem;"></i>
+							
+							<!-- Modal -->
+							<div class="modal fade" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+							  <div class="modal-dialog modal-dialog-centered" role="document">
+							    <div class="modal-content">
+							      <div class="modal-body text-center">
+							        <a href="#" id="deleteBtn">삭제하기</a>
+							      </div>
+							    </div>
+							  </div>
+							</div>
 						</div>
 					</div>
 					
@@ -71,7 +85,7 @@
 							
 							<button type="button" class="btn btn-outline-secondary col-2 btn-sm comment-btn" th:data-post-id="${card.postId}">보내기</button>
 						</div>
-					</di>
+					</div>
 					
 					<hr>
 					
@@ -133,7 +147,6 @@
 							alert("좋아요 취소 에러!");
 						}
 					});
-					
 				});
 				
 				$(".comment-btn").on("click", function() {
@@ -157,7 +170,36 @@
 							alert("댓글 작성 에러!");
 						}
 					});
+				});
+				
+				$(".menu-btn").on("click", function() {
 					
+					let postId = $(this).data("post-id");
+					
+					// modal의 삭제 버큰인 a 태그에 data-post-id 값을 추가한다.
+					$("#deleteBtn").data("post-id", postId);
+					
+				});
+				
+				$("#deleteBtn").on("click", function() {
+					
+					let postId = $(this).data("post-id");
+					
+					$.ajax({
+						type:"delete"
+						, url:"/post/delete"
+						, data:{"id":postId}
+						, success:function(response) {
+							if(response.result == "success") {
+								location.reload();
+							} else {
+								alert("게시글 삭제 실패!");
+							}
+						}
+						, error:function() {
+							alert("게시글 삭제 에러!");
+						}
+					});
 				});
 			});
 		</script>
