@@ -1,5 +1,7 @@
 package com.dptcldpa.instalogram.like.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.dptcldpa.instalogram.like.domain.Like;
@@ -20,8 +22,10 @@ public class LikeService {
 				.postId(postId)
 				.userId(userId)
 				.build();
+		
 		try {
 			likeRepository.save(like);
+			
 			return true;
 		} catch(Exception e) {
 			return false;
@@ -29,11 +33,30 @@ public class LikeService {
 		
 	}
 	
+	public boolean deleteLike(int postId, int userId) {
+		
+		Optional<Like> optionalLike = likeRepository.findByPostIdAndUserId(postId, userId);
+		
+		if(optionalLike.isPresent()) {
+			Like like = optionalLike.get();
+			
+			likeRepository.delete(like);
+			
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
 	public int getLikeCount(int postId) {
+		
 		return likeRepository.countByPostId(postId);
+		
 	}
 	
 	public boolean isLike(int postId, int userId) {
+		
 		int count = likeRepository.countByPostIdAndUserId(postId, userId);
 		
 		if(count > 0) {

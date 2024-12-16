@@ -37,7 +37,7 @@
 					<div class="d-flex justify-content-between">
 						<div class="d-flex">
 							<i th:unless="${card.isLike}" class="bi bi-heart text-secondary like-btn" th:data-post-id="${card.postId}" style="font-size: 1.2rem;"></i>
-							<i th:if="${card.isLike}" class="bi bi-heart-fill text-danger" style="font-size: 1.2rem;"></i>
+							<i th:if="${card.isLike}" class="bi bi-heart-fill text-danger unlike-btn" th:data-post-id="${card.postId}" style="font-size: 1.2rem;"></i>
 							<div th:text="|${card.likeCount}|" class="ml-2">100</div>
 						</div>
 						
@@ -112,6 +112,28 @@
 							alert("좋아요 에러!");
 						}
 					});
+				});
+				
+				$(".unlike-btn").on("click", function() {
+					
+					let postId = $(this).data("post-id");
+					
+					$.ajax({
+						type:"delete"
+						, url:"/post/unlike"
+						, data:{"postId": postId}
+						, success:function(response) {
+							if(response.result == "success") {
+								location.reload();
+							} else {
+								alert("좋아요 취소 실패!");
+							}
+						}
+						, error:function() {
+							alert("좋아요 취소 에러!");
+						}
+					});
+					
 				});
 				
 				$(".comment-btn").on("click", function() {
