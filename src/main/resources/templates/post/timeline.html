@@ -76,7 +76,7 @@
 						<div th:each="comment:${card.commentList}" class="d-flex">
 		 					<div th:text="${comment.loginId}">comment_id</div>
 		 					
-							<div th:text="${comment.contents}">댓글 내용</div>
+							<div th:text="${comment.comments}">댓글 내용</div>
 						</div>
 						
 						<!-- 댓글 작성하는 곳 -->
@@ -163,7 +163,7 @@
 					$.ajax({
 						type:"post"
 						, url:"/post/comment/create"
-						, data:{"postId": postId, "comments":content}
+						, data:{"postId": postId, "comments":comment}
 						, success:function(response) {
 							if(response.result == "success") {
 								location.reload();
