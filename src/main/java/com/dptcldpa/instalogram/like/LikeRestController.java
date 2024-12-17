@@ -31,9 +31,9 @@ public class LikeRestController {
 		Map<String, String> resultMap = new HashMap<>();
 		
 		if(likeService.addLike(postId, userId)) {
-			resultMap.put("reuslt", "success");
+			resultMap.put("result", "success");
 		} else {
-			resultMap.put("reuslt", "fail");
+			resultMap.put("result", "fail");
 		}
 		
 		return resultMap;
@@ -50,9 +50,9 @@ public class LikeRestController {
 		Map<String, String> resultMap = new HashMap<>();
 		
 		if(likeService.deleteLike(postId, userId)) {
-			resultMap.put("reuslt", "success");
+			resultMap.put("result", "success");
 		} else {
-			resultMap.put("reuslt", "fail");
+			resultMap.put("result", "fail");
 		}
 		
 		return resultMap;
